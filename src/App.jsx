@@ -17,12 +17,15 @@ const reducer = (state, action) => {
       } else {
         return { ...state, input: state.input + action.payload };
       }
-    case "CALCULATE":
-      return {
-        ...state,
-        input: eval(state.input).toString(),
-        result: eval(state.input).toString(),
-      };
+      case "CALCULATE":
+        try {
+            return {
+                ...state,
+                input: eval(state.input).toString(),
+            };
+        } catch (error) {
+            return { ...state, input: "Error" };
+        }
     case "CLEAR":
       return initialState;
     case "DELETE":
